@@ -376,10 +376,10 @@ View(NONPBF_complete_ROE)
 PBF_complete_ROE$residualsquaredroe <- resid(model_PBF_mean_ROE)^2
 NONPBF_complete_ROE$residualsquaredroe <- resid(model_NONPBF_mean_ROE)^2
 
-model_PBF_SV_ROE = feols(residualsquaredroe ~ costs_employees + costs_goodssold + costs_materials + currentratio + solvency + costs_employees:costs_goodssold + costs_employees:costs_materials + costs_goodssold:costs_materials | id + year, cluster = c("year", "id"), data = PBF_complete_ROE[which(PBF_complete_ROE$residualroe<0),])
+model_PBF_SV_ROE = feols(residualsquaredroe ~ costs_employees + costs_materials + currentratio + solvency + costs_employees:costs_materials | id + year, cluster = c("year", "id"), data = PBF_complete_ROE[which(PBF_complete_ROE$residualroe<0),])
 summary(model_PBF_SV_ROE)
 
-model_NONPBF_SV_ROE = feols(residualsquaredroe ~ costs_employees + costs_goodssold + costs_materials + currentratio + solvency + costs_employees:costs_goodssold + costs_employees:costs_materials + costs_goodssold:costs_materials | id + year, cluster = c("year", "id"), data = NONPBF_complete_ROE[which(NONPBF_complete_ROE$residualroe<0),])
+model_NONPBF_SV_ROE = feols(residualsquaredroe ~ costs_employees + costs_materials + currentratio + solvency + costs_employees:costs_materials | id + year, cluster = c("year", "id"), data = NONPBF_complete_ROE[which(NONPBF_complete_ROE$residualroe<0),])
 summary(model_NONPBF_SV_ROE)
 
 marginaleffects(model_PBF_SV_ROE, newdata=datagrid(), vcov=T)
